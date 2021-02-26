@@ -23,3 +23,27 @@ https://docs.microsoft.com/en-us/windows/nodejs/setup-on-wsl2#:~:text=To%20insta
 >>> cd my-app/
 >>> npm start
 ```
+
+## APP Hierarchy
+
+Board component
+- Subboard component
+    - subboardname div class
+    - CardCounter component
+    - taskrow div class
+        - Card component
+    - button div class
+        - Addtaskbutton component
+
+## Features
+
+- elements layout
+- show task name on task cards
+- Increment count when "(+) ADD TASK" button is clicked.
+
+## TODO
+
+> Add as many tasks on any sub-board
+> Drag and drop any task card between sub-boards
+> Reorder task card
+> Edit tasks name and content inline

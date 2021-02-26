@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -9,7 +9,7 @@ class Card extends React.Component {
     return (
       <div className="taskCard" taskid="{this.props.taskid}">
         {/*<p>{this.props.tasktitle}</p>*/}
-        <p>Task Title {this.props.taskid}</p>
+        <p>{this.props.taskheader} {this.props.taskid}</p>
       </div>
     );
   }
@@ -41,6 +41,7 @@ class Subboard extends React.Component {
     super(props);
     this.state = {
       cardcount: 0,
+      cardcontent: [],
     };
   }
 
@@ -53,26 +54,34 @@ class Subboard extends React.Component {
   }
 
   handleClick() {
-    this.setState({cardcount: this.state.cardcount + 1 })
+    this.setState({ cardcount: this.state.cardcount + 1 })
+    this.setState({ cardcontent: this.state.cardcontent.concat({taskid: this.state.cardcount,
+                                                                taskheader: "my 2nd task",
+                                                                taskdesc: "this is my first task"
+                                                              })
+                 })
   }
 
   renderCardCount() {
     return <CardCounter cardcount={this.state.cardcount} />;
   }
 
-  renderCard(i) {
-    return <Card />;
+  renderCard() {
+    return (
+      this.state.cardcontent.map((e) => <Card taskid={e.taskid}
+                                        taskheader={e.taskheader}
+                                        taskdesc={e.taskdesc} />
+                                )
+    )
   }
 
-  render(subboardname) {
+  render() {
     return (
       <div className="subBoard">
         <div className="subboardname">{this.props.subboardname}</div>
         {this.renderCardCount()}
         <div className="taskrow">
-          {this.renderCard(0)}
-          {this.renderCard(0)}
-          {this.renderCard(0)}
+          {this.renderCard()}
         </div>
         <div className="buttondiv">
           {this.renderaddtaskbutton()}
