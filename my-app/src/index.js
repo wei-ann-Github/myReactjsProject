@@ -6,6 +6,12 @@ import reportWebVitals from './reportWebVitals';
 
 // Reference for useState: https://daveceddia.com/usestate-hook-examples/, section on useState with an array
 // Reference for draggable cards: https://blog.usejournal.com/implementing-react-drag-and-drop-without-any-external-library-d7ec00437afb
+// Other unused reference for DND
+// - https://www.csscodelab.com/react-js-drag-and-drop/
+// - https://www.csscodelab.com/simple-react-dnd-examples/
+// - https://codepen.io/AbhiPatel18/pen/gNyeBR?editors=0110
+// - https://codepen.io/renjar/pen/pdxBNB?editors=0010
+// - https://www.freecodecamp.org/news/reactjs-implement-drag-and-drop-feature-without-using-external-libraries-ad8994429f1a/
 
 // A SubBoardContent is used to define 
 // 1. The task counter in each sub-board
