@@ -24,26 +24,35 @@ https://docs.microsoft.com/en-us/windows/nodejs/setup-on-wsl2#:~:text=To%20insta
 >>> npm start
 ```
 
-## APP Hierarchy
+## Component Hierarchy in index.js
 
-Board component
-- Subboard component
-    - subboardname div class
-    - CardCounter component
-    - taskrow div class
-        - Card component
-    - button div class
-        - Addtaskbutton component
+Board
+- SubBoard ("Pending" sub board)
+    - subBoardName div
+    - SubBoardContent
+        - taskCount div
+        - taskArea div
+            - taskCard div
+                - taskTitle input
+                - taskContent input
+        - ButtonDiv div
+            - addTaskButton button
+- SubBoard ("In Progress" sub board)
+    - ... ...
+- SubBoard ("Completed" sub board)
+    - ... ...
+
 
 ## Features
 
-- elements layout
-- show task name on task cards
 - Increment count when "(+) ADD TASK" button is clicked.
+- Add as many tasks on any sub-board
+- Edit tasks name and content inline
 
 ## TODO
 
-> Add as many tasks on any sub-board
-> Drag and drop any task card between sub-boards
-> Reorder task card
-> Edit tasks name and content inline
+### User Requirements.
+
+- Drag and drop any task card between sub-boards
+    - Might need Board global taskid
+- Reorder task card

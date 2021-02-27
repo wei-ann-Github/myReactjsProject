@@ -12,14 +12,19 @@ ol, ul {
   padding-left: 30px;
 }
 
+.board {
+  /* border: 5px solid #D52A2A; */
+  width: 80%;
+}
+
 .header {
   background: #2C3539;
-  /* border: 5px solid #D52A2A; */
   color: white;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .desktop {
@@ -36,7 +41,6 @@ ol, ul {
   font-size: 24px;
   font-weight: bold;
   line-height: 34px;
-  height: 64px;
   margin: 0 auto;
   width: 90%;
   margin-top: 8px;
@@ -47,15 +51,32 @@ ol, ul {
   width: 100%;
   box-sizing: border-box;
   border: 0;
+  font-size: 24px;
 }
 
-.taskDesc {
-  width: 100%;
+.taskContent {
+  border-color: Transparent;
+  min-width:100%;
+  max-width:100%;
   box-sizing: border-box;
   font-size: 16px;
 }
 
 .subBoard {
+  background: #C0C0C0;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  margin-top: 15px;
+  margin-left: 1%;
+  /* padding: 0; */
+  text-align: center;
+  width: 32%;
+  min-height: 105px;
+}
+
+.subBoardContent  {
   background: #C0C0C0;
   float: left;
   font-size: 24px;
@@ -68,13 +89,13 @@ ol, ul {
   min-height: 105px;
 }
 
-.subboardname {
+.subBoardName {
   height: 35 px;
   vertical-align: middle;
   margin-top: 5px;
 }
 
-.taskcount {
+.taskCount {
   position: relative;
   height: 20px;
   font-size: 12px;
@@ -82,19 +103,19 @@ ol, ul {
   text-align: right;
 }
 
-.taskrow {
+.taskRow {
   margin-top: 5px;
   margin: 0 auto;
   width: 100%;
 }
 
-.buttondiv {
+.buttonDiv {
   position: relative;
   height: 50px;
   width: 100%;
 }
 
-.addtaskbutton {
+.addTaskButton {
   font-size: 15px;
   height: 34px;
   width: 90%;
