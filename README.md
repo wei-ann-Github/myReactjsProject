@@ -52,11 +52,19 @@ Board
 - Edit tasks name and content inline
 - Reorder task card
 
-## TODO
+## Version
+- V0.0.1a
 
-- Drag and drop any task card between sub-boards
-    - Might need Board global taskid
+## Roadmap
 
-## Bugs
+### TODO
 
-- cards reordering bugs.
+- Drag and drop any task card between sub-boards.
+    - Might need Board global taskid.
+- Retrieve data from a DB for data persistence.
+- Add subboard.
+
+### Bugs
+
+- cards reordering bug.
+
