@@ -57,12 +57,15 @@ Board
 
 ## Roadmap
 
-### TODO
+### User Stories
 
 - Drag and drop any task card between sub-boards.
     - Might need Board global taskid.
+
+### Enhancements
+
 - Retrieve data from a DB for data persistence.
-- Add subboard.
+- task card to look the same when dragged.
 
 ### Bugs
 
