@@ -7,14 +7,20 @@ import reportWebVitals from './reportWebVitals';
 // Reference for useState: https://daveceddia.com/usestate-hook-examples/, section on useState with an array
 // Reference for draggable cards: https://blog.usejournal.com/implementing-react-drag-and-drop-without-any-external-library-d7ec00437afb
 
+// A SubBoardContent is used to define 
+// 1. The task counter in each sub-board
+// 2. The div for containing all the taks cards.
+// 3. The div for containing the button for adding task cards
 function SubBoardContent() {
-  const [items, setItems] = useState([]);  // stores card content.
-  const [taskId, setTaskId] = useState(0);
+  const [items, setItems] = useState([]);  // A list for tracking the contents of every task card created in a sub-board.
+  const [taskId, setTaskId] = useState(0);  // A list for incrementing the taskid every time a card is create in the sub-board.
 
+  // will be called when the add task button is clicked.
   const addCard = event => {
     event.preventDefault();
     setItems([
       ...items,
+      // content of a task card.
       {
         // id: items.length,
         title: "Enter Task Title",
@@ -22,13 +28,14 @@ function SubBoardContent() {
         key: taskId,
       }
     ]);
-    setTaskId(taskId + 1);
-    console.log('task items: ' + items)
+    setTaskId(taskId + 1);  // increment taskId on add card
   };
 
+  // hook for storing the task card being dragged.
   const draggingItem = useRef();
   const dragOverItem = useRef();
 
+  // Handle dragging task card
   const handleDragStart = (e, position) => {
     draggingItem.current = position;
     console.log('drag start: ' + e.target.innerHTML + ' ' + e.target.key);
@@ -52,6 +59,7 @@ function SubBoardContent() {
      setItems(itemsCopy);
   };
 
+  // Returns a subboard's counter, task cards and add task button 
   return (
     <div className='subBoardContent'>
       <div className='taskCounter'>{items.length} tasks</div>
@@ -79,6 +87,7 @@ function SubBoardContent() {
   );
 }
 
+// returns a sub-board with the sub-board title and sub board content.
 const SubBoard = (props) => {
     return(
       <div className='subBoard'>
@@ -88,16 +97,18 @@ const SubBoard = (props) => {
     )
 }
 
- function Board () {
-   return (
-     <div className='board'>
-       <div className="header">React Assignment - Task Board</div>
-       <SubBoard title='Pending'/>
-       <SubBoard title='In Progress'/>
-       <SubBoard title='Completed'/>
-     </div>
-   );
- }
+// The main UI of the trello-clone
+// Contains all the sub boards
+function Board () {
+  return (
+    <div className='board'>
+      <div className="header">React Assignment - Task Board</div>
+      <SubBoard title='Pending'/>
+      <SubBoard title='In Progress'/>
+      <SubBoard title='Completed'/>
+    </div>
+  );
+}
 
 ReactDOM.render(
         <Board />,
