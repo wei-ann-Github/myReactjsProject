@@ -1,111 +1,109 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-class Card extends React.Component {
-  render() {
-    return (
-      <div className="taskCard" taskid="{this.props.taskid}">
-        {/*<p>{this.props.tasktitle}</p>*/}
-        <p>Task Title {this.props.taskid}</p>
+// Reference for useState: https://daveceddia.com/usestate-hook-examples/, section on useState with an array
+// Reference for draggable cards: https://blog.usejournal.com/implementing-react-drag-and-drop-without-any-external-library-d7ec00437afb
+
+function SubBoardContent() {
+  const [items, setItems] = useState([]);  // stores card content.
+  const [taskId, setTaskId] = useState(0);
+
+  const addCard = event => {
+    event.preventDefault();
+    setItems([
+      ...items,
+      {
+        // id: items.length,
+        title: "Enter Task Title",
+        content: "Enter Task Description",
+        key: taskId,
+      }
+    ]);
+    setTaskId(taskId + 1);
+    console.log('task items: ' + items)
+  };
+
+  const draggingItem = useRef();
+  const dragOverItem = useRef();
+
+  const handleDragStart = (e, position) => {
+    draggingItem.current = position;
+    console.log('drag start: ' + e.target.innerHTML + ' ' + e.target.key);
+  };
+
+  const handleDragEnter = (e, position) => {
+   dragOverItem.current = position;
+   console.log('dragging over: ' + e.target.innerHTML);
+  };
+
+  const handleDragEnd = (e) => {
+    console.log('on drag end: draggingItem.current ' + draggingItem.current)
+    const itemsCopy = [...items];
+    const draggingItemContent = itemsCopy[draggingItem.current];
+    itemsCopy.splice(draggingItem.current, 1);
+    console.log('on drag end: dragoveritem ' + dragOverItem.current)
+    itemsCopy.splice(dragOverItem.current, 0, draggingItemContent);
+
+     draggingItem.current = null;
+     dragOverItem.current = null;
+     setItems(itemsCopy);
+  };
+
+  return (
+    <div className='subBoardContent'>
+      <div className='taskCounter'>{items.length} tasks</div>
+      <div className='taskarea'>
+        {items.map(item => (
+          <div className='taskCard' 
+            key={item.key}
+            onDragStart={(e) => handleDragStart(e, item.key)}
+            onDragEnter={(e) => handleDragEnter(e, item.key)}
+            onDragEnd={handleDragEnd}
+            draggable
+          >
+            <input placeholder={'Task #' + item.key + ' ' + item.title}
+              className='taskTitle'
+            />
+            <textarea rows="5" name="text" placeholder={item.content} className='taskContent'/>
+          </div>
+        ))}
       </div>
-    );
-  }
+      <div className='buttonDiv'>
+      <button className='addTaskButton'
+        onClick={addCard}>(+) ADD TASK</button>
+      </div>
+    </div>
+  );
 }
 
-class Addtaskbutton extends React.Component {
-  render() {
-    return (
-      <button
-        className="addtaskbutton"
-        onClick={() => this.props.onClick()}
-      >
-        (+) ADD TASK
-      </button>
+const SubBoard = (props) => {
+    return(
+      <div className='subBoard'>
+        <div className='subBoardName'>{props.title}</div>
+        <SubBoardContent />
+      </div>
     )
-  }
 }
 
-class CardCounter extends React.Component {
-  render() {
-    return (
-      <div className="taskcount">{this.props.cardcount} tasks</div>
-    )
-  }
-}
-
-class Subboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      cardcount: 0,
-    };
-  }
-
-  renderaddtaskbutton() {
-    return (
-      <Addtaskbutton
-        onClick={() => this.handleClick()}
-      />
-    );
-  }
-
-  handleClick() {
-    this.setState({cardcount: this.state.cardcount + 1 })
-  }
-
-  renderCardCount() {
-    return <CardCounter cardcount={this.state.cardcount} />;
-  }
-
-  renderCard(i) {
-    return <Card />;
-  }
-
-  render(subboardname) {
-    return (
-      <div className="subBoard">
-        <div className="subboardname">{this.props.subboardname}</div>
-        {this.renderCardCount()}
-        <div className="taskrow">
-          {this.renderCard(0)}
-          {this.renderCard(0)}
-          {this.renderCard(0)}
-        </div>
-        <div className="buttondiv">
-          {this.renderaddtaskbutton()}
-        </div>
-      </div>
-    );
-  }
-}
-
-class Board extends React.Component {
-  rendersubboard(subboardname) {
-    return <Subboard subboardname={subboardname} />;
-  }
-
-  render() {
-    return (
-      <div className="main">
-        <div className="header">React Assignment - Task Board</div>
-        <div className="desktop">
-          {this.rendersubboard("Pending")}
-          {this.rendersubboard("In Progress")}
-          {this.rendersubboard("Completed")}
-        </div>
-      </div>
-    );
-  }
-}
+ function Board () {
+   return (
+     <div className='board'>
+       <div className="header">React Assignment - Task Board</div>
+       <SubBoard title='Pending'/>
+       <SubBoard title='In Progress'/>
+       <SubBoard title='Completed'/>
+     </div>
+   );
+ }
 
 ReactDOM.render(
-  <Board />,
-  //<Card />,
-  document.getElementById('root')
-);
+        <Board />,
+        document.getElementById('root')
+      );
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
