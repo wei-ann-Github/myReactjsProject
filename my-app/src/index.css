@@ -77,8 +77,8 @@ ol, ul {
 }
 
 .subBoardContent  {
+  /*border: 1px solid #D52A2A;*/
   background: #C0C0C0;
-  float: left;
   font-size: 24px;
   font-weight: bold;
   line-height: 34px;
@@ -86,7 +86,6 @@ ol, ul {
   padding: 0;
   text-align: center;
   width: 100%;
-  min-height: 105px;
 }
 
 .subBoardName {
@@ -95,7 +94,7 @@ ol, ul {
   margin-top: 5px;
 }
 
-.taskCount {
+.taskCounter {
   position: relative;
   height: 20px;
   font-size: 12px;
@@ -110,13 +109,16 @@ ol, ul {
 }
 
 .buttonDiv {
+  /*border: 5px solid #D52A2A;*/
+  display: inline-block;
   position: relative;
   height: 50px;
   width: 100%;
 }
 
 .addTaskButton {
-  font-size: 15px;
+  /* border: 5px solid #D52A2A; */
+  font-size: 20px;
   height: 34px;
   width: 90%;
   margin-top: 8px;
